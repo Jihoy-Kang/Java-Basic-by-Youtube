@@ -2,10 +2,11 @@ package org.opentutorials.javatutorials.algorithm;
 
 public class Codestates {
     public static void main(String[] args){
-        int intVal = 9;
-        char charVal = Character.forDigit(intVal, 10);
+        String str = "loop";
+        char from = 'o';
+        char to = 'e';
 
-        System.out.println(intVal); // 결과값 : 9
-        System.out.println(charVal); // 결과값 : 9
+        str = str.replace(from,to);
+        System.out.println(str);
     }
 }
