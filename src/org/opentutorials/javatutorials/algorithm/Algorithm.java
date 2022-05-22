@@ -4,11 +4,18 @@ import java.util.Arrays;
 
 public class Algorithm {
     public static void main(String[] args) {
-        int num = 5;
-        if(num == 0) System.out.println(false) ;
-        for(int i = 1; i < num;i++){
-            if(num%i == 0) System.out.println(false);
-            else System.out.println(true);
-        }
+        Example example = new Example();
+        Example example2 = new Example(5);
+    }
+}
+
+class Example  {
+    public Example() {
+        System.out.println("Example의 기본 생성자 호출!");
+    };
+
+    public Example(int x) {
+        this();
+        System.out.println("Example의 두 번째 생성자 호출!");
     }
 }
