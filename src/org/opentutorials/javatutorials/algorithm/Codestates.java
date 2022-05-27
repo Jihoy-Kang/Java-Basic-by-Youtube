@@ -1,28 +1,43 @@
 package org.opentutorials.javatutorials.algorithm;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Arrays;
+import java.util.*;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.ArrayList;
 
 public class Codestates {
     public static void main(String[] args){
-        Solution sl = new Solution();
-        int[] arr2 = new int[]{-1, -2, 1, 2, 3, 4, 5};
-        System.out.println(sl.take(5, arr2));
+        int bufferSize = 1;
+        int capacities = 10;
+        int[] documents = new int[]{7, 4, 5, 6,1,5,2,9,8,7,2,1,};
+
+        int sec = 0;
+        int queCapa = 0;
+        int i = 0;
+
+        ArrayList<Integer> pollQue = new ArrayList<Integer>();
+        ArrayBlockingQueue<Integer> queue = new ArrayBlockingQueue<Integer>(bufferSize);
+
+        queue.offer(documents[0]);
+        pollQue.add(bufferSize+1);
+        while (!queue.isEmpty()){
+            sec += 1;
+            queCapa = 0;
+            if(sec == pollQue.get(0)){
+                queue.poll();
+                pollQue.remove(0);
+            }
+            for(int que : queue){
+                queCapa += que;
+            }
+
+            if((queCapa+documents[i]) <= capacities && i < documents.length-1){
+                queue.offer(documents[i]);
+                pollQue.add(sec+bufferSize);
+                    i += 1;
+            }
+        }
+        System.out.println(sec);
     }
 }
 
-class Solution {
-    int[] take(int num, int[] arr){
-        // TODO:
-        if(arr.length == 0 || arr.length <= num) return arr;
-        if(num == 0) return new int[0];
 
-        int[] head = Arrays.copyOfRange(arr, 0, 1);
-        int[] tail = take(num-1, Arrays.copyOfRange(arr, 1, arr.length));
-
-        int[] result = new int[arr.length - (head.length + tail.length)];
-        result = Arrays.copyOfRange(arr, 0, num);
-        return result;
-    }
-}
